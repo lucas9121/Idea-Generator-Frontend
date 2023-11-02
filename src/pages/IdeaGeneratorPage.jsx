@@ -11,12 +11,14 @@ export default function IdeaGenerationPage () {
     const handleSubmit = async(evt) => {
         evt.preventDefault();
         const { openAIFinalResponse } = await createIdeaRequest({targetAudience, interest})
-        setGenereatedIdeasFromAPI(openAIFinalResponse)
+        //removing empty spaces
+        const nonEmptyIdeas = openAIFinalResponse.filter((idea) => idea.trim() !== "");
+        setGenereatedIdeasFromAPI(nonEmptyIdeas)
     }
 
 
     return(
-        <div>
+        <div className="h-full">
             <div className="w-full my-20 flex flex-col gap-4 max-w-lg mx-auto">
                 <div className="text-3xl text-center font-bold">Create Your Micro SaaS Idea</div>
                 <div className="flex flex-col">
@@ -32,9 +34,10 @@ export default function IdeaGenerationPage () {
                 </div>
             </div>
             {genereatedIdeasFromAPI.length && (
-                <div className="w-full max-w-lg mx-auto overflow-auto">
+                <div className="h-3/6 w-full max-w-lg mx-auto overflow-auto">
                     <div className="text-3xl">Your Ideas</div>
                     {genereatedIdeasFromAPI.map((idea, idx) => {
+                        console.log(idx)
                         const [title, description] = idea.split(':')     
                         return (
                             <div key={idx} className="my-4 text-center border border-white rounded py-2 px-4">
