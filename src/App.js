@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="">
       <div className='h-screen bg-slate-900 font-sans overflow-hidden relative text-white'>
-        <div className='flex flex-col flex-wrap'>
+        <div className='flex flex-col flex-wrap h-full'>
           <IdeaGenerationPage />
         </div>
       </div>
