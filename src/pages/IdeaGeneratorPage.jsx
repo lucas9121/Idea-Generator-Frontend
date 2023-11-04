@@ -10,6 +10,7 @@ export default function IdeaGenerationPage () {
 
     const handleSubmit = async(evt) => {
         evt.preventDefault();
+        console.log('clicked')
         const { openAIFinalResponse } = await createIdeaRequest({targetAudience, interest})
         //removing empty spaces
         const nonEmptyIdeas = openAIFinalResponse.filter((idea) => idea.trim() !== "");
