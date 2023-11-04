@@ -11,10 +11,20 @@ export default function IdeaGenerationPage () {
     const handleSubmit = async(evt) => {
         evt.preventDefault();
         console.log('clicked')
-        const { openAIFinalResponse } = await createIdeaRequest({targetAudience, interest})
-        //removing empty spaces
-        const nonEmptyIdeas = openAIFinalResponse.filter((idea) => idea.trim() !== "");
-        setGenereatedIdeasFromAPI(nonEmptyIdeas)
+        try {
+            const response = await createIdeaRequest({ targetAudience, interest });
+        
+            if (response && response.openAIFinalResponse) {
+              const { openAIFinalResponse } = response;
+              //removing empty spaces
+              const nonEmptyIdeas = openAIFinalResponse.filter((idea) => idea.trim() !== "");
+              setGenereatedIdeasFromAPI(nonEmptyIdeas);
+            } else {
+              console.error("Response or openAIFinalResponse is undefined or missing in the API response.");
+            }
+          } catch (error) {
+            console.error("An error occurred while making the API request:", error);
+          }
     }
 
 
