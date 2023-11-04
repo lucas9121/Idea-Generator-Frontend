@@ -10,7 +10,7 @@ export default function IdeaGenerationPage () {
 
     const handleSubmit = async(evt) => {
         evt.preventDefault();
-        console.log('clicked')
+        console.log('clicked!')
         try {
             const response = await createIdeaRequest({ targetAudience, interest });
         
